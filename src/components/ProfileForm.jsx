@@ -18,7 +18,7 @@ const ProfileForm = ({ showEditForm = true }) => {
   const { hackId } = useParams();
 
   const userProfile = async () => {
-    const data = await axios.get("http://localhost:3000/api/user/profile", {
+    const data = await axios.get(`${import.meta.env.VITE_API_URL}/user/profile`, {
       withCredentials: true,
     });
 

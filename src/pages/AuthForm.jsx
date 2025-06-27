@@ -39,7 +39,7 @@ const AuthForm = () => {
     const registerationCredentials = { username, email, password };
     if (isLogin) {
       const response = await axios.post(
-        "http://localhost:3000/api/user/login",
+        `${import.meta.env.VITE_API_URL}/user/login`,
         loginCredentials,
         { withCredentials: true }
       );

@@ -52,7 +52,7 @@ const Profile = () => {
     }
 
     const response = await axios.post(
-      "http://localhost:3000/api/user/profile",
+      `${import.meta.env.VITE_API_URL}/user/profile`,
       profileData,
       {
         withCredentials: true,
