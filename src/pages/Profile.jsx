@@ -10,7 +10,9 @@ import {
 import axios from "axios";
 import ProfileForm from "../components/ProfileForm";
 
+import { HackContext } from "../../context/HackContext";
 const Profile = () => {
+  const { notify } = useContext(HackContext);
   const currentYear = new Date().getFullYear();
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -64,7 +66,7 @@ const Profile = () => {
         }
       );
       notify(response.data.message || "Profile updated successfully");
-      setIsOpen(false); 
+      setIsOpen(false);
       userProfile();
     } catch (error) {
       console.error("Upload error:", error);
