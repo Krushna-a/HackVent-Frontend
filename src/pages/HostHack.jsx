@@ -77,7 +77,7 @@ const HostHack = () => {
         navigate('/Hackathons');
       }
     } catch (error) {
-      console.error("Error submitting hackathon:", error);
+      console.error("Error submitting hackathon:", error.data);
     }
   };
   return (
