@@ -33,34 +33,45 @@ const Profile = () => {
   // yaha par handle submit me profile pic update ka function likhna h
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let profileData = {};
-    if (profileImage) {
-      profileData = {
-        profileImage,
-      };
-    } else {
-      profileData = {
-        fullName,
-        location,
-        course,
-        college,
-        graduatingYear,
-        courseDuration,
-        gender,
-        profileImage,
-      };
-    }
-
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/user/profile`,
-      profileData,
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+    setLoading(true);
+    try {
+      let profileData = {};
+      if (profileImage) {
+        profileData = {
+          profileImage,
+        };
+      } else {
+        profileData = {
+          fullName,
+          location,
+          course,
+          college,
+          graduatingYear,
+          courseDuration,
+          gender,
+          profileImage,
+        };
       }
-    );
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user/profile`,
+        profileData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      notify(response.data.message || "Profile updated successfully");
+      setIsOpen(false); 
+      userProfile();
+    } catch (error) {
+      console.error("Upload error:", error);
+      notify(error.response?.data?.message || "Upload failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
